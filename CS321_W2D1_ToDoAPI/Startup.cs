@@ -27,7 +27,8 @@ namespace CS321_W2D1_ToDoAPI
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
-            services.AddSingleton<IToDoService, ToDoService>();
+
+            // HINT: register custom services here
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
