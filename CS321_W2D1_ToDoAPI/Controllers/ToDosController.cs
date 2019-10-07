@@ -11,8 +11,9 @@ namespace CS321_W2D1_ToDoAPI.Controllers
         private readonly IToDoService _todoService;
 
         // Constructor
-        public ToDosController(/* HINT: add an IToDoService parameter here */)
+        public ToDosController(IToDoService toDoService/* HINT: add an IToDoService parameter here */)
         {
+            _todoService = toDoService;
             // HINT: store a reference to the service in _todoService so we can use below
         }
 
@@ -43,6 +44,16 @@ namespace CS321_W2D1_ToDoAPI.Controllers
         [HttpPost]
         public IActionResult Post([FromBody] ToDo newToDo)
         {
+            // ???? how to do a custom error message ??
+            // ???  below does nothing   ?????
+            string Bad = "poop";
+            if (newToDo.Description == Bad)
+            {
+                {
+                    ModelState.AddModelError("Description", "Don't poop on my to do list, you!");
+                }
+            }
+            //   ?? above does nothing ??
             try
             {
                 // add the new todo
@@ -53,6 +64,14 @@ namespace CS321_W2D1_ToDoAPI.Controllers
                 ModelState.AddModelError("AddToDo", ex.Message);
                 return BadRequest(ModelState);
             }
+            
+                                /*   if (!ModelState.IsValid)
+                                {
+                                    return BadRequest(ModelState);
+                                }
+
+                                // add the new todo
+                                _todoService.Add(newToDo);   */
 
             // return a 201 Created status. This will also add a "location" header
             // with the URI of the new todo. E.g., /api/todos/99, if the new is 99

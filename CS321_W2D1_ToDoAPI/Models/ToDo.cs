@@ -8,8 +8,9 @@ namespace CS321_W2D1_ToDoAPI.Models
         [Required]
         public int Id { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "A Description must be provided") ]
         [MaxLength(80, ErrorMessage = "Description should be no more than 80 characters.")]
+        [MinLength(3, ErrorMessage = "The Descripton must be 3 characters or longer")]
         public string Description { get; set; }
 
         public bool IsComplete { get; set; }
